@@ -8,6 +8,7 @@ RoboKit Worlds is a Rust-first executable-world platform. Production changes mus
 - `runtime-api` owns the capability boundary implemented by simulator and robot adapters.
 - `evidence` owns immutable run provenance and artifact references.
 - `evaluation` owns deterministic verifier execution.
+- `calibration` owns validated physical-observation contracts and parameter estimation.
 - Applications compose crates; they do not own business rules.
 - Simulator- and ROS-specific types must remain under `adapters/`.
 

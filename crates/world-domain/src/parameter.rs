@@ -20,7 +20,9 @@ pub enum ParameterUnit {
 }
 
 /// Supported calibratable property.
-#[derive(Clone, Copy, Debug, Deserialize, JsonSchema, PartialEq, Eq, Serialize)]
+#[derive(
+    Clone, Copy, Debug, Deserialize, Hash, JsonSchema, Ord, PartialEq, Eq, PartialOrd, Serialize,
+)]
 #[serde(rename_all = "snake_case")]
 pub enum ParameterProperty {
     /// Contact friction coefficient.
@@ -35,6 +37,12 @@ pub enum ParameterProperty {
     ScaleNoiseStandardDeviation,
     /// Scale settling duration.
     ScaleSettlingTime,
+    /// Material mass present before execution.
+    InitialMaterialMass,
+    /// Tilt angle above which containment is no longer trusted.
+    SpillTiltThreshold,
+    /// Tilt angle above which granular flow begins.
+    PourOnsetTiltThreshold,
 }
 
 impl ParameterProperty {
@@ -43,7 +51,10 @@ impl ParameterProperty {
             Self::FrictionCoefficient => ParameterUnit::Dimensionless,
             Self::FlowRate => ParameterUnit::GramsPerSecond,
             Self::DischargeDelay | Self::ScaleSettlingTime => ParameterUnit::Seconds,
-            Self::ResidualMass | Self::ScaleNoiseStandardDeviation => ParameterUnit::Grams,
+            Self::ResidualMass | Self::ScaleNoiseStandardDeviation | Self::InitialMaterialMass => {
+                ParameterUnit::Grams
+            }
+            Self::SpillTiltThreshold | Self::PourOnsetTiltThreshold => ParameterUnit::Radians,
         }
     }
 
@@ -52,10 +63,12 @@ impl ParameterProperty {
             Self::FrictionCoefficient => {
                 matches!(entity, EntityKind::Vessel { .. } | EntityKind::WorkSurface)
             }
-            Self::FlowRate | Self::DischargeDelay => {
+            Self::FlowRate | Self::DischargeDelay | Self::InitialMaterialMass => {
                 matches!(entity, EntityKind::Material { .. })
             }
-            Self::ResidualMass => matches!(entity, EntityKind::Vessel { .. }),
+            Self::ResidualMass | Self::SpillTiltThreshold | Self::PourOnsetTiltThreshold => {
+                matches!(entity, EntityKind::Vessel { .. })
+            }
             Self::ScaleNoiseStandardDeviation | Self::ScaleSettlingTime => matches!(
                 entity,
                 EntityKind::Instrument {

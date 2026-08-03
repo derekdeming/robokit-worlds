@@ -9,9 +9,9 @@ use world_domain::{PackagePath, RunId, Sha256Digest, WorldId, WorldVersion};
 /// Version of the serialized run-manifest contract.
 #[derive(Clone, Copy, Debug, Deserialize, JsonSchema, PartialEq, Eq, Serialize)]
 pub enum RunManifestSchemaVersion {
-    /// Initial immutable run-manifest contract.
-    #[serde(rename = "1.0.0")]
-    V1,
+    /// Runtime-version-complete immutable run-manifest contract.
+    #[serde(rename = "2.0.0")]
+    V2,
 }
 
 /// Whether evidence came from a simulator or physical system.
@@ -40,6 +40,8 @@ pub struct WorldRevision {
 pub struct RuntimeIdentity {
     /// Adapter implementation name.
     pub adapter_name: String,
+    /// Semantic adapter implementation version.
+    pub adapter_version: String,
     /// Simulator, robot controller, or instrument runtime name.
     pub engine_name: String,
     /// Semantic runtime version.
@@ -163,6 +165,13 @@ impl RunManifest {
                 "adapter and engine names must not be empty",
             ));
         }
+        if semver::Version::parse(&self.runtime.adapter_version).is_err() {
+            issues.push(ManifestValidationIssue::new(
+                "runtime.adapter_version",
+                ManifestValidationCode::InvalidVersion,
+                "adapter version must be valid semantic versioning",
+            ));
+        }
         if semver::Version::parse(&self.runtime.engine_version).is_err() {
             issues.push(ManifestValidationIssue::new(
                 "runtime.engine_version",
@@ -282,7 +291,7 @@ mod tests {
 
     fn manifest() -> RunManifest {
         RunManifest {
-            schema_version: RunManifestSchemaVersion::V1,
+            schema_version: RunManifestSchemaVersion::V2,
             run_id: RunId::from_uuid(Uuid::nil()),
             run_kind: RunKind::Simulation,
             world: WorldRevision {
@@ -292,6 +301,7 @@ mod tests {
             },
             runtime: RuntimeIdentity {
                 adapter_name: "mujoco".to_owned(),
+                adapter_version: "0.1.0".to_owned(),
                 engine_name: "mujoco".to_owned(),
                 engine_version: "3.6.0".to_owned(),
             },

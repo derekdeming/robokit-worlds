@@ -10,4 +10,6 @@ The adapter must:
 - emit typed runtime observations and content-addressed artifacts;
 - keep MuJoCo-specific types and parameter names out of `world-domain`.
 
-Implementation begins after the Granular Dosing v0 world contract is accepted. The first implementation will use the official Python bindings for numerical iteration while preserving the Rust-owned execution contract.
+The first implementation uses the official pinned Python bindings for numerical iteration while preserving a Rust-owned execution contract. Rust owns capability checks, parameter compilation, process supervision, response validation, evaluation, and evidence. Python owns only MuJoCo stepping, contact detection, pose interpolation, and the seeded granular-process state.
+
+The private worker contract is versioned and file-backed. Requests and responses are size-bounded, execution is bounded by both step count and a monotonic deadline, and the worker must report the exact engine version expected by Rust.

@@ -122,6 +122,8 @@ pub trait RuntimeObserver {
 pub struct ExecutionSummary {
     /// Number of executed runtime steps.
     pub executed_steps: u64,
+    /// Duration advanced in the simulated or physical task timeline.
+    pub logical_duration: Seconds,
     /// Observed wall-clock duration.
     pub wall_clock_duration: Seconds,
 }

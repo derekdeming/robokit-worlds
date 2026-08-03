@@ -1,0 +1,5 @@
+schema_version = "1.0.0"
+scene_asset = "assets/workcell.xml"
+controlled_entity_id = "robot"
+controlled_body = "dosing_tool"
+forbidden_contact_geometries = ["target_vessel"]

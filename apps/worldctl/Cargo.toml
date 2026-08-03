@@ -8,17 +8,19 @@ repository.workspace = true
 
 [dependencies]
 clap.workspace = true
+calibration = { path = "../../crates/calibration" }
 evaluation = { path = "../../crates/evaluation" }
 evidence = { path = "../../crates/evidence" }
+mujoco-adapter = { path = "../../adapters/mujoco" }
+runtime-api = { path = "../../crates/runtime-api" }
 schemars.workspace = true
 serde.workspace = true
 serde_json.workspace = true
+tempfile.workspace = true
 thiserror.workspace = true
+time.workspace = true
 toml.workspace = true
 world-domain = { path = "../../crates/world-domain" }
-
-[dev-dependencies]
-tempfile.workspace = true
 
 [lints]
 workspace = true

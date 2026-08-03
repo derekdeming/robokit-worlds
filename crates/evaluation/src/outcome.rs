@@ -18,6 +18,6 @@ pub struct RunOutcome {
     pub mass_measurements: Vec<MassMeasurement>,
     /// Scientific, operational, and safety events.
     pub events: Vec<EventKind>,
-    /// End-to-end execution duration.
+    /// Duration advanced on the task timeline.
     pub duration: Seconds,
 }

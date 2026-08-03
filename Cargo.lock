@@ -74,6 +74,20 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "72f5acc6cb2ba439de613abc23857ec3d78374d8ed5ac84e9d11336e87da8649"
 
 [[package]]
+name = "calibration"
+version = "0.1.0"
+dependencies = [
+ "schemars",
+ "semver",
+ "serde",
+ "serde_json",
+ "thiserror",
+ "toml",
+ "uuid",
+ "world-domain",
+]
+
+[[package]]
 name = "cfg-if"
 version = "1.0.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -323,6 +337,22 @@ name = "memchr"
 version = "2.8.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "cf8baf1c55e62ffcace7a9f06f4bd9cd3f0c4beb022d3b367256b91b87513d98"
+
+[[package]]
+name = "mujoco-adapter"
+version = "0.1.0"
+dependencies = [
+ "runtime-api",
+ "schemars",
+ "serde",
+ "serde_json",
+ "tempfile",
+ "thiserror",
+ "toml",
+ "uuid",
+ "wait-timeout",
+ "world-domain",
+]
 
 [[package]]
 name = "num-conv"
@@ -712,6 +742,15 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "0b928f33d975fc6ad9f86c8f283853ad26bdd5b10b7f1542aa2fa15e2289105a"
 
 [[package]]
+name = "wait-timeout"
+version = "0.2.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "09ac3b126d3914f9849036f826e054cbabdc8519970b8998ddaf3b5bd3c65f11"
+dependencies = [
+ "libc",
+]
+
+[[package]]
 name = "wasm-bindgen"
 version = "0.2.126"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -798,14 +837,18 @@ dependencies = [
 name = "worldctl"
 version = "0.1.0"
 dependencies = [
+ "calibration",
  "clap",
  "evaluation",
  "evidence",
+ "mujoco-adapter",
+ "runtime-api",
  "schemars",
  "serde",
  "serde_json",
  "tempfile",
  "thiserror",
+ "time",
  "toml",
  "world-domain",
 ]

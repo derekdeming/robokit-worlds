@@ -1,0 +1,44 @@
+[project]
+name = "robokit-mujoco-adapter"
+version = "0.1.0"
+description = "Pinned MuJoCo numerical worker for RoboKit executable worlds"
+requires-python = ">=3.13,<3.14"
+dependencies = [
+    "mujoco==3.7.0",
+    "numpy>=2.3,<3",
+    "pydantic>=2.12,<3",
+]
+
+[project.scripts]
+robokit-mujoco = "robokit_mujoco.cli:main"
+
+[dependency-groups]
+dev = [
+    "pytest>=9,<10",
+    "ruff>=0.12,<1",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/robokit_mujoco"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py313"
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = [
+    "COM812",
+    "D203",
+    "D213",
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**/*.py" = ["S101"]

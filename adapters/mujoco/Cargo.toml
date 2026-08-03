@@ -1,0 +1,24 @@
+[package]
+name = "mujoco-adapter"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[dependencies]
+runtime-api = { path = "../../crates/runtime-api" }
+schemars.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+tempfile.workspace = true
+thiserror.workspace = true
+toml.workspace = true
+wait-timeout.workspace = true
+world-domain = { path = "../../crates/world-domain" }
+
+[dev-dependencies]
+uuid.workspace = true
+
+[lints]
+workspace = true
