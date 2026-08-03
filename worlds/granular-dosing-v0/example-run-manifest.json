@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "19fe48b0-daa7-4a93-978e-471f426073dd",
+  "run_kind": "simulation",
+  "world": {
+    "id": "d48e64b6-9f73-4e83-8b56-94788c8f027d",
+    "version": "0.1.0",
+    "definition_sha256": "0a4f51e88779434c80fb9dfaa62e3d1b2ee1b9b04d5c7f501dd42ea802c5d758"
+  },
+  "runtime": {
+    "adapter_name": "reference-fixture",
+    "engine_name": "robokit-fixture",
+    "engine_version": "0.1.0"
+  },
+  "seed": 7,
+  "started_at": "2026-08-03 12:00:00.0 +00:00:00",
+  "finished_at": "2026-08-03 12:00:09.4 +00:00:00",
+  "artifacts": [
+    {
+      "relative_path": "passing-outcome.json",
+      "role": "outcome",
+      "media_type": "json",
+      "sha256": "fe2a1968fbdcace7b4cf2ecc4d101b59e51956235880f12a63048f79ed265721",
+      "byte_length": 145
+    }
+  ]
+}

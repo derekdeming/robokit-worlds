@@ -1,0 +1,10 @@
+{
+  "mass_measurements": [
+    {
+      "measurement_id": "transferred_mass",
+      "value": 106.2
+    }
+  ],
+  "events": ["spill"],
+  "duration": 11.1
+}

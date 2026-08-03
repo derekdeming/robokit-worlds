@@ -1,0 +1,294 @@
+schema_version = "1.0.0"
+id = "d48e64b6-9f73-4e83-8b56-94788c8f027d"
+version = "0.1.0"
+name = "Granular Dosing v0"
+
+[[entities]]
+id = "robot"
+name = "Dosing manipulator"
+
+[entities.entity]
+kind = "robot"
+embodiment = "manipulator"
+
+[entities.initial_pose.position]
+x = 0.0
+y = 0.0
+z = 0.0
+
+[entities.initial_pose.orientation]
+x = 0.0
+y = 0.0
+z = 0.0
+w = 1.0
+
+[[entities]]
+id = "scale"
+name = "Target balance"
+
+[entities.entity]
+kind = "instrument"
+instrument = "scale"
+
+[entities.initial_pose.position]
+x = 0.25
+y = 0.0
+z = 0.0
+
+[entities.initial_pose.orientation]
+x = 0.0
+y = 0.0
+z = 0.0
+w = 1.0
+
+[[entities]]
+id = "overhead_camera"
+name = "Overhead RGB-D camera"
+
+[entities.entity]
+kind = "instrument"
+instrument = "rgbd_camera"
+
+[entities.initial_pose.position]
+x = 0.0
+y = 0.0
+z = 1.5
+
+[entities.initial_pose.orientation]
+x = 1.0
+y = 0.0
+z = 0.0
+w = 0.0
+
+[[entities]]
+id = "source_vessel"
+name = "Source vessel"
+
+[entities.entity]
+kind = "vessel"
+role = "source"
+
+[entities.initial_pose.position]
+x = -0.25
+y = 0.0
+z = 0.12
+
+[entities.initial_pose.orientation]
+x = 0.0
+y = 0.0
+z = 0.0
+w = 1.0
+
+[[entities]]
+id = "target_vessel"
+name = "Target vessel"
+
+[entities.entity]
+kind = "vessel"
+role = "target"
+
+[entities.initial_pose.position]
+x = 0.25
+y = 0.0
+z = 0.08
+
+[entities.initial_pose.orientation]
+x = 0.0
+y = 0.0
+z = 0.0
+w = 1.0
+
+[[entities]]
+id = "granular_material"
+name = "Nonhazardous calibration granules"
+
+[entities.entity]
+kind = "material"
+class = "granular"
+
+[entities.initial_pose.position]
+x = -0.25
+y = 0.0
+z = 0.18
+
+[entities.initial_pose.orientation]
+x = 0.0
+y = 0.0
+z = 0.0
+w = 1.0
+
+[[entities]]
+id = "work_surface"
+name = "Instrumented work surface"
+
+[entities.entity]
+kind = "work_surface"
+
+[entities.initial_pose.position]
+x = 0.0
+y = 0.0
+z = 0.0
+
+[entities.initial_pose.orientation]
+x = 0.0
+y = 0.0
+z = 0.0
+w = 1.0
+
+[entities.asset]
+logical_path = "assets/workcell.xml"
+format = "mjcf"
+sha256 = "6a3a0705fafce6a1e950c3fd9f6c0a55c5f10de9bf1e8a20d5cbb1bdfd64d6ef"
+
+[task]
+id = "dose_granular_material"
+name = "Dose 100 grams of granular material"
+
+[[task.steps]]
+id = "move_to_pour_pose"
+action = "move_to_pose"
+actor_id = "robot"
+duration = 1.5
+
+[task.steps.target.position]
+x = 0.10
+y = 0.0
+z = 0.35
+
+[task.steps.target.orientation]
+x = 0.0
+y = 0.0
+z = 0.0
+w = 1.0
+
+[[task.steps]]
+id = "rotate_to_pour"
+action = "rotate_about_axis"
+actor_id = "robot"
+axis = "y"
+angle = 1.0471975512
+duration = 1.0
+
+[[task.steps]]
+id = "hold_pour"
+action = "wait"
+duration = 2.0
+
+[[task.steps]]
+id = "return_upright"
+action = "rotate_about_axis"
+actor_id = "robot"
+axis = "y"
+angle = -1.0471975512
+duration = 1.0
+
+[[task.steps]]
+id = "settle_scale"
+action = "wait"
+duration = 3.0
+
+[[task.steps]]
+id = "measure_transferred_mass"
+action = "measure_mass"
+instrument_id = "scale"
+measurement_id = "transferred_mass"
+
+[[parameters]]
+id = "material_flow_rate"
+unit = "grams_per_second"
+
+[parameters.target]
+entity_id = "granular_material"
+property = "flow_rate"
+
+[parameters.distribution]
+distribution = "uniform"
+minimum = 35.0
+maximum = 65.0
+
+[[parameters]]
+id = "discharge_delay"
+unit = "seconds"
+
+[parameters.target]
+entity_id = "granular_material"
+property = "discharge_delay"
+
+[parameters.distribution]
+distribution = "normal"
+mean = 0.18
+standard_deviation = 0.04
+
+[[parameters]]
+id = "residual_mass"
+unit = "grams"
+
+[parameters.target]
+entity_id = "source_vessel"
+property = "residual_mass"
+
+[parameters.distribution]
+distribution = "uniform"
+minimum = 0.5
+maximum = 4.0
+
+[[parameters]]
+id = "source_vessel_friction"
+unit = "dimensionless"
+
+[parameters.target]
+entity_id = "source_vessel"
+property = "friction_coefficient"
+
+[parameters.distribution]
+distribution = "uniform"
+minimum = 0.20
+maximum = 0.55
+
+[[parameters]]
+id = "scale_noise"
+unit = "grams"
+
+[parameters.target]
+entity_id = "scale"
+property = "scale_noise_standard_deviation"
+
+[parameters.distribution]
+distribution = "normal"
+mean = 0.0
+standard_deviation = 0.15
+
+[[parameters]]
+id = "scale_settling_time"
+unit = "seconds"
+
+[parameters.target]
+entity_id = "scale"
+property = "scale_settling_time"
+
+[parameters.distribution]
+distribution = "uniform"
+minimum = 1.5
+maximum = 3.0
+
+[[verifiers]]
+verifier = "mass_within_tolerance"
+measurement_id = "transferred_mass"
+target = 100.0
+tolerance = 2.0
+
+[[verifiers]]
+verifier = "forbidden_event_absent"
+event = "spill"
+
+[[verifiers]]
+verifier = "forbidden_event_absent"
+event = "collision"
+
+[[verifiers]]
+verifier = "forbidden_event_absent"
+event = "safety_stop"
+
+[[verifiers]]
+verifier = "maximum_duration"
+limit = 15.0

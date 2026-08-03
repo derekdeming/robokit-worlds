@@ -1,0 +1,24 @@
+[package]
+name = "worldctl"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[dependencies]
+clap.workspace = true
+evaluation = { path = "../../crates/evaluation" }
+evidence = { path = "../../crates/evidence" }
+schemars.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+thiserror.workspace = true
+toml.workspace = true
+world-domain = { path = "../../crates/world-domain" }
+
+[dev-dependencies]
+tempfile.workspace = true
+
+[lints]
+workspace = true
