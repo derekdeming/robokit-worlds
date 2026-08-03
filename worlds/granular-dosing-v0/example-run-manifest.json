@@ -1,14 +1,15 @@
 {
-  "schema_version": "1.0.0",
+  "schema_version": "2.0.0",
   "run_id": "19fe48b0-daa7-4a93-978e-471f426073dd",
   "run_kind": "simulation",
   "world": {
     "id": "d48e64b6-9f73-4e83-8b56-94788c8f027d",
-    "version": "0.1.0",
-    "definition_sha256": "0a4f51e88779434c80fb9dfaa62e3d1b2ee1b9b04d5c7f501dd42ea802c5d758"
+    "version": "0.2.0",
+    "definition_sha256": "c076011aeb745e8d2335094d8389a3c37ceefc7ca05b13d32d60b52d0c8bfa4b"
   },
   "runtime": {
     "adapter_name": "reference-fixture",
+    "adapter_version": "0.1.0",
     "engine_name": "robokit-fixture",
     "engine_version": "0.1.0"
   },

@@ -35,7 +35,7 @@ pub enum VerifierDefinition {
         /// Event whose presence fails the run.
         event: EventKind,
     },
-    /// Require completion within a wall-clock duration.
+    /// Require completion within a logical task duration.
     MaximumDuration {
         /// Inclusive duration limit.
         limit: Seconds,

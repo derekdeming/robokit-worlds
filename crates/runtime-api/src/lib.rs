@@ -4,8 +4,8 @@ mod capability;
 mod execution;
 
 pub use capability::{
-    CapabilityMismatch, MaterialCapability, ProtocolActionCapability, RuntimeCapabilities,
-    RuntimeKind,
+    CapabilityMismatch, CapabilityRequirement, EventCapability, MaterialCapability,
+    ProtocolActionCapability, RuntimeCapabilities, RuntimeDescriptor, RuntimeKind,
 };
 pub use execution::{
     ExecutionLimits, ExecutionRequest, ExecutionSummary, RuntimeAdapter, RuntimeEvent,

@@ -45,3 +45,36 @@ fn validates_manifest_and_content_addressed_outcome() {
     assert!(output.status.success());
     assert!(String::from_utf8_lossy(&output.stdout).contains("valid run manifest"));
 }
+
+#[test]
+fn publishes_and_reproduces_a_calibrated_world_package() {
+    let temporary_directory = tempfile::tempdir().expect("temporary directory should be created");
+    let package = temporary_directory.path().join("calibrated-world");
+    let calibration = Command::new(env!("CARGO_BIN_EXE_worldctl"))
+        .args(["calibrate-granular", "--world"])
+        .arg(fixture("world.toml"))
+        .args(["--dataset"])
+        .arg(fixture("calibration/synthetic-physical-dataset.json"))
+        .args(["--new-version", "0.3.0", "--output"])
+        .arg(&package)
+        .output()
+        .expect("calibration should execute");
+    assert!(
+        calibration.status.success(),
+        "{}",
+        String::from_utf8_lossy(&calibration.stderr)
+    );
+
+    let validation = Command::new(env!("CARGO_BIN_EXE_worldctl"))
+        .args(["validate-calibration-package", "--package"])
+        .arg(&package)
+        .output()
+        .expect("calibration validation should execute");
+
+    assert!(
+        validation.status.success(),
+        "{}",
+        String::from_utf8_lossy(&validation.stderr)
+    );
+    assert!(String::from_utf8_lossy(&validation.stdout).contains("valid calibration package"));
+}

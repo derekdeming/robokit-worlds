@@ -403,6 +403,17 @@ impl ValidatedWorldDefinition {
         &self.0
     }
 
+    /// Iterates over calibrated parameters with one semantic property.
+    pub fn parameters_with_property(
+        &self,
+        property: crate::ParameterProperty,
+    ) -> impl Iterator<Item = &ParameterDefinition> {
+        self.0
+            .parameters
+            .iter()
+            .filter(move |parameter| parameter.target.property == property)
+    }
+
     /// Consumes the wrapper and returns the underlying definition.
     pub fn into_definition(self) -> WorldDefinition {
         self.0

@@ -1,0 +1,56 @@
+{
+  "schema_version": "1.0.0",
+  "world": {
+    "id": "d48e64b6-9f73-4e83-8b56-94788c8f027d",
+    "version": "0.2.0",
+    "definition_sha256": "c076011aeb745e8d2335094d8389a3c37ceefc7ca05b13d32d60b52d0c8bfa4b"
+  },
+  "material_batch_id": "synthetic-calibration-batch-do-not-treat-as-physical-evidence",
+  "observations": [
+    {
+      "run_id": "10000000-0000-4000-8000-000000000001",
+      "source_manifest_sha256": "dab8435deddcfa8303bf8d931976b703171d768dc481baa44e987a83376fdd89",
+      "hold_duration": 1.4,
+      "tilt_angle": 1.0,
+      "transferred_mass": 66.9,
+      "scale_settled": true,
+      "events": []
+    },
+    {
+      "run_id": "10000000-0000-4000-8000-000000000002",
+      "source_manifest_sha256": "629814e4d9c67c16bd39576422c34f398ffd70aa01c0bb9368e51297d851e358",
+      "hold_duration": 1.7,
+      "tilt_angle": 1.0,
+      "transferred_mass": 83.75,
+      "scale_settled": true,
+      "events": []
+    },
+    {
+      "run_id": "10000000-0000-4000-8000-000000000003",
+      "source_manifest_sha256": "b2d8ef655e28cd22d4ace262ae57e90b26a597e241c7012fcd5c802d36a4c13a",
+      "hold_duration": 2.0,
+      "tilt_angle": 1.0,
+      "transferred_mass": 100.15,
+      "scale_settled": true,
+      "events": []
+    },
+    {
+      "run_id": "10000000-0000-4000-8000-000000000004",
+      "source_manifest_sha256": "0498c3707f66f3c7f9198fcd651084e6fc45efa17758597803d6d759e3c8e94c",
+      "hold_duration": 2.3,
+      "tilt_angle": 1.0,
+      "transferred_mass": 116.5,
+      "scale_settled": true,
+      "events": []
+    },
+    {
+      "run_id": "10000000-0000-4000-8000-000000000005",
+      "source_manifest_sha256": "c16857e5b5983acc0049946e0968ba6dc027da02bc05fe81660e166fa5670a52",
+      "hold_duration": 2.6,
+      "tilt_angle": 1.0,
+      "transferred_mass": 133.2,
+      "scale_settled": true,
+      "events": []
+    }
+  ]
+}

@@ -3,7 +3,7 @@
 mod digest;
 mod manifest;
 
-pub use digest::sha256_digest;
+pub use digest::{sha256_digest, sha256_digest_reader};
 pub use manifest::{
     ArtifactMediaType, ArtifactReference, ArtifactRole, ManifestValidationCode,
     ManifestValidationError, ManifestValidationIssue, RunKind, RunManifest,
